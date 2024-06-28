@@ -1,28 +1,43 @@
-#pragma once
+
 #ifndef __Entity__
 #define __Entity__
-
 #include <string>
 #include <vector>
-#include <memory>
+#include <memory> // Para el uso de std::shared_ptr
+
 #include <iostream>
 using namespace std;
 
-
-class Entity
-{
+enum class EntityType {
+	ENTITY,
+	ROOM,
+	EXIT,
+	ITEM,
+	MONSTER,
+	HUMAN
+};
+class Entity {
 public:
-	Entity(const std::string& name, const std::string& description, std::shared_ptr<Entity> parent = nullptr);
+	Entity(const string& name, const string& description, shared_ptr<Entity> parent = nullptr);
 	virtual ~Entity();
+
 	virtual void Look() const;
+	virtual EntityType GetType() const;
 	void AddChild(std::shared_ptr<Entity> child);
 	void RemoveChild(std::shared_ptr<Entity> child);
-	const std::vector<std::shared_ptr<Entity>>& GetChildren() const;
+
+	string GetName() const;
+	string GetDescription() const;
+	shared_ptr<Entity> GetParent() const;
+	const vector<shared_ptr<Entity>>& GetChildren() const;
+
 
 protected:
 	std::string name;
 	std::string description;
-	std::vector<shared_ptr<Entity>> children;
-
+	std::shared_ptr<Entity> parent;
+	std::vector<std::shared_ptr<Entity>> children; // Lista de hijos
 };
-#endif // !__Entity__
+
+#endif // __Entity__
+
