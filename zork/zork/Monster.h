@@ -3,18 +3,19 @@
 
 #include <string>
 #include "Entity.h"
+#include "Player.h"
 #include "Stats.h"
 #include <memory>
 #include <vector>
 class Room;
 class Item;
-
+class Player;
 using namespace std;
 
 class Monster : public Entity
 {
 public:
-	Monster(const string& name, const string& description, shared_ptr<Room> room, int health = 100, int strength = 10, int defense = 5, int speed = 5);
+	Monster(const string& name, const string& description, shared_ptr<Room> room, int health = 100, int strength = 10, int defense = 5, int speed = 5, shared_ptr<Item> weapon = nullptr);
 	~Monster();
 	virtual EntityType GetType() const override;
 	virtual void Look(const vector<string>& args) const;
@@ -24,7 +25,8 @@ public:
 	int GetStrength() const;
 	int GetDefense() const;
 	int GetSpeed() const;
-
+	void SetCombatTarget(std::shared_ptr<Player> target) { combat_target = target; }
+	std::weak_ptr<Player> GetCombatTarget() const { return combat_target; }
 	void SetHealth(int value);
 	void SetStrength(int value);
 	void SetDefense(int value);
@@ -33,7 +35,7 @@ public:
 	virtual int MakeAttack();
 	virtual int ReceiveAttack(int damage);
 	virtual void Die();
-	virtual bool Loot(const vector<string>& args);
+	
 
 
 	shared_ptr<Room> GetRoom() const;
@@ -43,7 +45,9 @@ public:
 
 private:
 	Stats stats;
-	shared_ptr<Entity> combat_target;
+	std::weak_ptr<Player> combat_target;;
+	shared_ptr<Item> weapon;
+	shared_ptr<Item> armor;
 };
 
 #endif //__Monster__

@@ -1,15 +1,20 @@
-#ifndef __Globals__
-#define __Globals__
+#ifndef __GLOBALS_H__
+#define __GLOBALS_H__
 
 #include <string>
 #include <vector>
+#include <memory>
 
 using namespace std;
 
-bool Same(const string& a, const string& b);
-bool Same(const char* a, const string& b);
-bool Same(const string& a, const char* b);
-int Roll(int min, int max);
-void Tokenize(const string& line, vector<string>& arguments);
+// Tokenize function
+void Tokenize(const string& str, vector<string>& tokens);
 
-#endif //__Globals__
+// Check if two strings are the same
+bool Same(const string& str1, const string& str2);
+
+// Helper functions
+bool CheckArgsSize(const vector<string>& args, size_t expected_size);
+void PrintInvalidCommand();
+
+#endif // __GLOBALS_H__

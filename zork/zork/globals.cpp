@@ -1,39 +1,23 @@
 #include "globals.h"
+#include <sstream>
+#include <iostream>
 
-//using namespace std;
-
-// -------------------------------------------------
-bool Same(const string& a, const string& b)
-{
-	return _stricmp(a.c_str(), b.c_str()) == 0;
+void Tokenize(const string& str, vector<string>& tokens) {
+    istringstream iss(str);
+    string token;
+    while (getline(iss, token, ' ')) {
+        tokens.push_back(token);
+    }
 }
 
-bool Same(const char* a, const string& b)
-{
-	return _stricmp(a, b.c_str()) == 0;
+bool Same(const string& str1, const string& str2) {
+    return str1 == str2;
 }
 
-bool Same(const string& a, const char* b)
-{
-	return _stricmp(a.c_str(), b) == 0;
+bool CheckArgsSize(const vector<string>& args, size_t expected_size) {
+    return args.size() == expected_size;
 }
 
-int Roll(int min, int max)
-{
-	return (max > 0) ? min + (rand() % (max - min)) : 0;
-}
-
-void Tokenize(const string& line, vector<string>& arguments)
-{
-	const char* str = line.c_str();
-
-	do
-	{
-		const char* begin = str;
-
-		while (*str != ' ' && *str)
-			str++;
-
-		arguments.push_back(string(begin, str));
-	} while (0 != *str++);
+void PrintInvalidCommand() {
+    cout << "\nSorry, I do not understand your command.\n";
 }

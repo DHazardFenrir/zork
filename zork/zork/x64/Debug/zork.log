@@ -1,0 +1,44 @@
+﻿  Entity.cpp
+  Exit.cpp
+  Human.cpp
+  Item.cpp
+  Monster.cpp
+  NPC.cpp
+  Player.cpp
+  Room.cpp
+  World.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xutility(231,56): error C2661: 'Player::Player': no overloaded function takes 4 arguments
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xutility(231,56): message : while trying to match the argument list '(const char [5], const char [29], std::shared_ptr<Room>, _Ty)'
+          with
+          [
+              _Ty=Stats
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(2023,1): message : see reference to function template instantiation 'void std::_Construct_in_place<_Ty,const char(&)[5],const char(&)[29],std::shared_ptr<Room>&,Stats>(_Ty &,const char (&)[5],const char (&)[29],std::shared_ptr<Room> &,Stats &&) noexcept(false)' being compiled
+          with
+          [
+              _Ty=Player
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(2703,36): message : see reference to function template instantiation 'std::_Ref_count_obj2<Player>::_Ref_count_obj2<const char(&)[5],const char(&)[29],std::shared_ptr<Room>&,_Ty>(const char (&)[5],const char (&)[29],std::shared_ptr<Room> &,_Ty &&)' being compiled
+          with
+          [
+              _Ty=Stats
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(2704,20): message : see reference to function template instantiation 'std::_Ref_count_obj2<Player>::_Ref_count_obj2<const char(&)[5],const char(&)[29],std::shared_ptr<Room>&,_Ty>(const char (&)[5],const char (&)[29],std::shared_ptr<Room> &,_Ty &&)' being compiled
+          with
+          [
+              _Ty=Stats
+          ]
+C:\Users\kille\Downloads\myzork\zork\zork\zork\World.cpp(59,108): message : see reference to function template instantiation 'std::shared_ptr<Player> std::make_shared<Player,const char(&)[5],const char(&)[29],std::shared_ptr<Room>&,Stats>(const char (&)[5],const char (&)[29],std::shared_ptr<Room> &,Stats &&)' being compiled
+  zork.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xutility(231,56): error C2661: 'Player::Player': no overloaded function takes 2 arguments
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xutility(231,56): message : while trying to match the argument list '(const char [5], const char [31])'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(2023,1): message : see reference to function template instantiation 'void std::_Construct_in_place<_Ty,const char(&)[5],const char(&)[31]>(_Ty &,const char (&)[5],const char (&)[31]) noexcept(false)' being compiled
+          with
+          [
+              _Ty=Player
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(2703,36): message : see reference to function template instantiation 'std::_Ref_count_obj2<Player>::_Ref_count_obj2<const char(&)[5],const char(&)[31]>(const char (&)[5],const char (&)[31])' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(2704,20): message : see reference to function template instantiation 'std::_Ref_count_obj2<Player>::_Ref_count_obj2<const char(&)[5],const char(&)[31]>(const char (&)[5],const char (&)[31])' being compiled
+C:\Users\kille\Downloads\myzork\zork\zork\zork\zork.cpp(32,79): message : see reference to function template instantiation 'std::shared_ptr<Player> std::make_shared<Player,const char(&)[5],const char(&)[31]>(const char (&)[5],const char (&)[31])' being compiled
+  Generating Code...
+C:\Users\kille\Downloads\myzork\zork\zork\zork\Monster.cpp(84): warning C4715: 'Monster::PlayerInRoom': not all control paths return a value

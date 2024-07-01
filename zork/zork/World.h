@@ -1,9 +1,10 @@
-#ifndef __World__
-#define __World__
+#ifndef __WORLD_H__
+#define __WORLD_H__
 
 #include <string>
-#include <list>
-#include <time.h>
+#include <vector>
+#include <memory>
+#include <ctime>
 
 #define TICK_FREQUENCY 0.5f
 
@@ -12,22 +13,33 @@ using namespace std;
 class Entity;
 class Player;
 
-class World
-{
+class World {
 public:
+    World();
+    ~World();
 
-	World();
-	~World();
+    // Main game loop method
+    void GameLoop();
+    void Initialize();
+    // Process game ticks
+    bool Tick(const vector<string>& args);
 
-	bool Tick(vector<string>& args);
-	bool ParseCommand(vector<string>& args);
-	void GameLoop();
-
+    void SetPlayer(shared_ptr<Player> newPlayer) {
+        player = newPlayer;
+    }
 private:
+   
+    // Parse user commands
+    bool ParseCommand(const vector<string>& args);
 
-	clock_t tick_timer;
-	list<Entity*> entities;
-	Player* player;
+    // Timer for ticks
+    clock_t tick_timer;
+    
+    // List of entities in the world
+    vector<shared_ptr<Entity>> entities;
+    
+    // Shared pointer to the player object
+    shared_ptr<Player> player;
 };
 
-#endif //__World__
+#endif // __WORLD_H__

@@ -1,9 +1,19 @@
+
+#include <string>
+#include "Room.h"
 #include "Entity.h"
 
-Entity::Entity(const string& name, const string& description, shared_ptr<Entity> parent)
-    : name(name), description(description), parent(parent) {}
+using namespace std;
+Entity::Entity(const std::string& entituName, const std::string& description, shared_ptr<Entity> parent, enum EntityType type) {
+    this->name = entituName; // Use 'this' pointer to avoid ambiguity with local variable
+    this->description = description;
+    this->parent = parent;
+    this->type = type;
+}
 
 Entity::~Entity() {}
+void Entity::Tick()
+{}
 
 void Entity::Look() const {
     std::cout << name << ": " << description << std::endl;
@@ -20,7 +30,7 @@ void Entity::RemoveChild(shared_ptr<Entity> child) {
     }
 }
 
-string Entity::GetName() const {
+std::string Entity::GetName() const {
     return name;
 }
 
@@ -37,5 +47,5 @@ const vector<shared_ptr<Entity>>& Entity::GetChildren() const {
 }
 
 EntityType Entity::GetType() const {
-    return EntityType::ENTITY
+    return EntityType::ENTITY;
 }

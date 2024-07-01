@@ -1,230 +1,209 @@
-#include <iostream>
+#include "World.h"
+#include "Entity.h"
+#include "Player.h"
+#include "Room.h"
+#include "Exit.h"
+#include "NPC.h"
+#include "Human.h"
+#include "Monster.h"
+#include "Item.h"
 #include "globals.h"
-#include "entity.h"
-#include "creature.h"
-#include "item.h"
-#include "exit.h"
-#include "room.h"
-#include "player.h"
-#include "world.h"
+#include <vector>
+#include <memory>
 
-// ----------------------------------------------------
 World::World()
-{
-	tick_timer = clock();
-
-	// Rooms ----
-	Room* forest = new Room("Forest", "You are surrounded by tall trees. It feels like a huge forest someone could get lost easily.");
-	Room* house = new Room("House", "You are inside a beautiful but small white house.");
-	Room* basement = new Room("Basement", "The basement features old furniture and dim light.");
-
-	Exit* ex1 = new Exit("west", "east", "Little path", house, forest);
-	Exit* ex2 = new Exit("down", "up", "Stairs", house, basement);
-	ex2->locked = true;
-
-	entities.push_back(forest);
-	entities.push_back(house);
-	entities.push_back(basement);
-
-	entities.push_back(ex1);
-	entities.push_back(ex2);
-
-	// Creatures ----
-	Creature* butler = new Creature("Butler", "It's James, the house Butler.", house);
-	butler->hit_points = 10;
-
-	entities.push_back(butler);
-
-	// Items -----
-	Item* mailbox = new Item("Mailbox", "Looks like it might contain something.", house);
-	Item* key = new Item("Key", "Old iron key.", mailbox);
-	ex2->key = key;
-
-	Item* sword = new Item("Sword", "A simple old and rusty sword.", forest, WEAPON);
-
-	sword->min_value = 2;
-	sword->max_value = 6;
-
-	Item* sword2(sword);
-	sword2->parent = butler;
-
-	Item* shield = new Item("Shield", "An old wooden shield.", butler, ARMOUR);
-	shield->min_value = 1;
-	shield->max_value = 3;
-	butler->AutoEquip();
-
-	entities.push_back(mailbox);
-	entities.push_back(sword);
-	entities.push_back(shield);
-
-	// Player ----
-	player = new Player("Hero", "You are an awesome adventurer!", forest);
-	player->hit_points = 25;
-	entities.push_back(player);
+    : tick_timer(clock()) {
+    // Constructor is intentionally empty
 }
 
-// ----------------------------------------------------
-World::~World()
-{
-	for (list<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it)
-		delete* it;
-
-	entities.clear();
+World::~World() {
+    // No need for manual cleanup as we are using smart pointers
+    entities.clear();
 }
 
-// ----------------------------------------------------
-bool World::Tick(vector<string>& args)
-{
-	bool ret = true;
+void World::Initialize() {
+    // Rooms ----
+    std::shared_ptr<Room> forest = std::make_shared<Room>("Forest", "You are surrounded by tall trees. It feels like a huge forest someone could get lost easily.");
+    
+    std::shared_ptr<Room> house = make_shared<Room>("House", "You are inside a beautiful but small white house.");
+    std::shared_ptr<Room> basement = make_shared<Room>("Basement", "The basement features old furniture and dim light.");
 
-	if (args.size() > 0 && args[0].length() > 0)
-		ret = ParseCommand(args);
+    auto ex1 = make_shared<Exit>("west", "east", "Little path", house, forest);
+    auto ex2 = make_shared<Exit>("down", "up", "Stairs", house, basement);
+    ex2->locked = true;
 
-	GameLoop();
+    entities.push_back(forest);
+    entities.push_back(house);
+    entities.push_back(basement);
+    entities.push_back(ex1);
+    entities.push_back(ex2);
 
-	return ret;
+    // NPCs ----
+    Stats npcStats{5,5,5,5};
+    auto butler = std::make_shared<NPC>("Butler", "The loyal butler.", forest, npcStats);
+
+    entities.push_back(butler);
+
+    // Items -----
+    auto mailbox = make_shared<Item>("Mailbox", "Looks like it might contain something.", house, ItemType::FOOD, Stats(0, 0, 0, 0));
+    auto key = std::make_shared<Item>("Key", "A small key.", forest, ItemType::KEY, Stats{});
+    ex2->key = key;
+
+    auto sword = make_shared<Item>("Sword", "A simple old and rusty sword.", forest, ItemType::WEAPON, Stats(0, 3, 1, 0));
+    auto shield = make_shared<Item>("Shield", "An old wooden shield.", house, ItemType::ARMOUR, Stats(0, 0, 2, 0));
+
+    entities.push_back(mailbox);
+    entities.push_back(sword);
+    entities.push_back(shield);
+
+    auto player = std::make_shared<Player>("Hero", "The brave hero of our story.", forest, Stats{10,5,10,4});
+
+    player->SetStrength(10); // Adjust as per your game's balance
+    entities.push_back(player);
 }
 
-// ----------------------------------------------------
-void World::GameLoop()
-{
-	clock_t now = clock();
+bool World::Tick(const vector<string>& args) {
+    bool ret = true;
 
-	if ((now - tick_timer) / CLOCKS_PER_SEC > TICK_FREQUENCY)
-	{
-		for (list<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it)
-			(*it)->Tick();
+    if (!args.empty() && !args[0].empty()) {
+        ret = ParseCommand(args);
+    }
 
-		tick_timer = now;
-	}
+    GameLoop();
+    return ret;
 }
 
-// ----------------------------------------------------
-bool World::ParseCommand(vector<string>& args)
-{
-	bool ret = true;
+void World::GameLoop() {
+    clock_t now = clock();
 
-	switch (args.size())
-	{
-	case 1: // commands with no arguments ------------------------------
-	{
-		if (Same(args[0], "look") || Same(args[0], "l"))
-		{
-			player->Look(args);
-		}
-		else if (Same(args[0], "north") || Same(args[0], "n"))
-		{
-			(args.size() == 1) ? args.push_back("north") : args[1] = "north";
-			player->Go(args);
-		}
-		else if (Same(args[0], "south") || Same(args[0], "s"))
-		{
-			(args.size() == 1) ? args.push_back("south") : args[1] = "south";
-			player->Go(args);
-		}
-		else if (Same(args[0], "east") || Same(args[0], "e"))
-		{
-			(args.size() == 1) ? args.push_back("east") : args[1] = "east";
-			player->Go(args);
-		}
-		else if (Same(args[0], "west") || Same(args[0], "w"))
-		{
-			(args.size() == 1) ? args.push_back("west") : args[1] = "west";
-			player->Go(args);
-		}
-		else if (Same(args[0], "up") || Same(args[0], "u"))
-		{
-			(args.size() == 1) ? args.push_back("up") : args[1] = "up";
-			player->Go(args);
-		}
-		else if (Same(args[0], "down") || Same(args[0], "d"))
-		{
-			(args.size() == 1) ? args.push_back("down") : args[1] = "down";
-			player->Go(args);
-		}
-		else if (Same(args[0], "stats") || Same(args[0], "st"))
-		{
-			player->Stats();
-		}
-		else if (Same(args[0], "inventory") || Same(args[0], "i"))
-		{
-			player->Inventory();
-		}
-		else
-			ret = false;
-		break;
-	}
-	case 2: // commands with one argument ------------------------------
-	{
-		if (Same(args[0], "look") || Same(args[0], "l"))
-		{
-			player->Look(args);
-		}
-		else if (Same(args[0], "go"))
-		{
-			player->Go(args);
-		}
-		else if (Same(args[0], "take") || Same(args[0], "pick"))
-		{
-			player->Take(args);
-		}
-		else if (Same(args[0], "drop") || Same(args[0], "put"))
-		{
-			player->Drop(args);
-		}
-		else if (Same(args[0], "equip") || Same(args[0], "eq"))
-		{
-			player->Equip(args);
-		}
-		else if (Same(args[0], "unequip") || Same(args[0], "uneq"))
-		{
-			player->UnEquip(args);
-		}
-		else if (Same(args[0], "examine") || Same(args[0], "ex"))
-		{
-			player->Examine(args);
-		}
-		else if (Same(args[0], "attack") || Same(args[0], "at"))
-		{
-			player->Attack(args);
-		}
-		else if (Same(args[0], "loot") || Same(args[0], "lt"))
-		{
-			player->Loot(args);
-		}
-		else
-			ret = false;
-		break;
-	}
-	case 3: // commands with two arguments ------------------------------
-	{
-		break;
-	}
-	case 4: // commands with three arguments ------------------------------
-	{
-		if (Same(args[0], "unlock") || Same(args[0], "unlk"))
-		{
-			player->UnLock(args);
-		}
-		else if (Same(args[0], "lock") || Same(args[0], "lk"))
-		{
-			player->Lock(args);
-		}
-		else if (Same(args[0], "take") || Same(args[0], "pick"))
-		{
-			player->Take(args);
-		}
-		else if (Same(args[0], "drop") || Same(args[0], "put"))
-		{
-			player->Drop(args);
-		}
-		else
-			ret = false;
-		break;
-	}
-	default:
-		ret = false;
-	}
+    if (static_cast<float>(now - tick_timer) / CLOCKS_PER_SEC >= TICK_FREQUENCY) {
+        for (const auto& entity : entities) {
+            entity->Tick(); // Call the Tick method for each entity
+        }
 
-	return ret;
+        tick_timer = now;
+    }
+}
+
+
+bool World::ParseCommand(const vector<string>& args) {
+    bool ret = true;
+
+    switch (args.size()) {
+    case 1: // Commands with no arguments
+        if (Same(args[0], "look") || Same(args[0], "l")) {
+            player->Look(args);
+        }
+        else if (Same(args[0], "north") || Same(args[0], "n")) {
+            vector<string> new_args = args;
+            new_args.push_back("north");
+            player->Go(new_args);
+            
+        }
+        else if (Same(args[0], "south") || Same(args[0], "s")) {
+            vector<string> new_args = args;
+            new_args.push_back("south");
+            player->Go(new_args);
+           
+        }
+        else if (Same(args[0], "east") || Same(args[0], "e")) {
+            vector<string> new_args = args;
+            new_args.push_back("east");
+            player->Go(new_args);
+        }
+        else if (Same(args[0], "west") || Same(args[0], "w")) {
+            vector<string> new_args = args;
+            new_args.push_back("west");
+            player->Go(new_args);
+        }
+        else if (Same(args[0], "up") || Same(args[0], "u")) {
+            vector<string> new_args = args;
+            new_args.push_back("up");
+            player->Go(new_args);
+        }
+        else if (Same(args[0], "down") || Same(args[0], "d")) {
+            vector<string> new_args = args;
+            new_args.push_back("down");
+            player->Go(new_args);
+        }
+        else if (Same(args[0], "stats") || Same(args[0], "st")) {
+            player->GetDefense();
+            player->GetSpeed();
+            player->GetStrength();
+            player->GetHealth();
+        }
+        else if (Same(args[0], "inventory") || Same(args[0], "i")) {
+            player->Inventory();
+        }
+        else {
+            ret = false;
+        }
+        break;
+
+    case 2: // Commands with one argument
+        if (Same(args[0], "look") || Same(args[0], "l")) {
+            player->Look(args);
+        }
+        else if (Same(args[0], "go")) {
+            player->Go(args);
+        }
+        else if (Same(args[0], "take") || Same(args[0], "pick")) {
+            player->Take(args);
+        }
+        else if (Same(args[0], "drop") || Same(args[0], "put")) {
+            player->Drop(args);
+        }
+        else if (Same(args[0], "equip") || Same(args[0], "eq")) {
+            player->Equip(args);
+        }
+        else if (Same(args[0], "unequip") || Same(args[0], "uneq")) {
+            player->UnEquip(args);
+        }
+        
+        else if (Same(args[0], "attack") || Same(args[0], "at")) {
+            player->Attack(args);
+        }
+        else if (Same(args[0], "loot") || Same(args[0], "lt")) {
+            player->Loot(args);
+        }
+        else if (Same(args[0], "talk")) {
+            player->Talk(args);
+        }
+        else {
+            ret = false;
+        }
+        break;
+
+    case 3: // Commands with two arguments
+        break;
+
+    case 4: // Commands with three arguments
+        if (Same(args[0], "unlock") || Same(args[0], "unlk")) {
+            player->UnLock(args);
+        }
+        else if (Same(args[0], "lock") || Same(args[0], "lk")) {
+            player->Lock(args);
+        }
+        else if (Same(args[0], "take") || Same(args[0], "pick")) {
+            player->Take(args);
+        }
+        else if (Same(args[0], "drop") || Same(args[0], "put")) {
+            player->Drop(args);
+        }
+        else if (Same(args[0], "eat") || Same(args[0], "et")) {
+            player->Eat(args);
+        }
+        else if (Same(args[0], "drink") || Same(args[0], "drk")) {
+            player->Drink(args);
+        }
+        else {
+            ret = false;
+        }
+        break;
+
+    default:
+        ret = false;
+    }
+
+    return ret;
 }

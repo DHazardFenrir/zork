@@ -31,6 +31,6 @@ int Stats::GetSpeed() const {
 	return speed;
 }
 
-void SetSpeed(int value) {
+void Stats::SetSpeed(int value) {
 	speed = value;
 }
