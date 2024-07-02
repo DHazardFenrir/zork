@@ -18,3 +18,15 @@ ItemType Item::getType() const {
 int Item::getEffect() const {
     return effect;
 }
+
+const std::vector<Item>& Item::getContents() const {
+    return contents;
+}
+
+std::vector<Item>& Item::getMutableContents() {
+    return contents;
+}
+
+void Item::addItem(const Item& item) {
+    contents.push_back(item);
+}

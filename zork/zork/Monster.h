@@ -21,6 +21,10 @@ public:
     std::string getDescription() const;
     bool alive() const;
     void equipItem(const Item& item);
+    const Stats& getStats() const;
+    void defend();
+    void resetDefense();
+    int temporaryDefense;
 };
 
 #endif

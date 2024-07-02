@@ -1,10 +1,16 @@
 #include "Stats.h"
 
 Stats::Stats(int health, int strength, int defense)
-    : health(health), strength(strength), defense(defense) {}
+    : health(health), strength(strength), defense(defense) {
+    maxHealth = health;
+}
 
 int Stats::getHealth() const {
     return health;
+}
+int Stats::getMaxHealth() const {
+    
+    return maxHealth;
 }
 
 void Stats::setHealth(int newHealth) {

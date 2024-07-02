@@ -13,6 +13,8 @@ private:
     std::map<std::string, Room*> exits;
     std::vector<Item> items;
     Monster* monster;
+    std::map<std::string, bool> lockedExits;
+    std::map<std::string, int> lockIds; // Which key is needed to open the lock
 
 public:
     Room(std::string desc);
@@ -25,6 +27,15 @@ public:
     const std::map<std::string, Room*>& getExits() const;  // Get exits from the room
     void describe() const;
     Room* move(const std::string& direction);
+    void removeItem(const std::string& itemName);
+    void showItems() const;
+    std::vector<Item>& getItems(); // Getter for items
+    std::vector<std::string> getItemNames() const;
+    Item* getItem(const std::string& itemName); // Method to get an item by name
+    void setLockedExit(const std::string& direction, int lockId);
+
+    bool unlockExit(const std::string& direction, const Item& key);
+    
 };
 
 #endif

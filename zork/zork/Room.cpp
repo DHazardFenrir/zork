@@ -15,6 +15,32 @@ void Room::connect(Room* room, const std::string& direction) {
 
 void Room::addItem(const Item& item) {
     items.push_back(item);
+   
+}
+
+void Room::removeItem(const std::string& itemName) {
+    for (auto it = items.begin(); it != items.end(); ++it) {
+        if (it->getName() == itemName) {
+            std::cout << it->getName() << " has been picked up from the room." << std::endl;
+            items.erase(it);
+            return;
+        }
+    }
+}
+
+void Room::showItems() const {
+    if (items.empty()) {
+        std::cout << "No items to see here." << std::endl;
+        return;
+    }
+    std::cout << "Items in this room:" << std::endl;
+    for (const auto& item : items) {
+        std::cout << " - " << item.getName() << ": " << item.getDescription() << std::endl;
+    }
+}
+
+std::vector<Item>& Room::getItems() {
+    return items;
 }
 
 void Room::setMonster(Monster* m) {
@@ -64,4 +90,35 @@ Room* Room::move(const std::string& direction) {
         std::cout << "You can't go that way.\n";
         return this;
     }
+}
+
+std::vector<std::string> Room::getItemNames() const {
+    std::vector<std::string> names;
+    for (const Item& item : items) {
+        names.push_back(item.getName());
+    }
+    return names;
+}
+
+Item* Room::getItem(const std::string& itemName) {
+    for (Item& item : items) {
+        if (item.getName() == itemName) {
+            return &item;
+        }
+    }
+    return nullptr; // Return nullptr if no item matches
+}
+
+void Room::setLockedExit(const std::string& direction, int lockId) {
+    lockedExits[direction] = true;
+    lockIds[direction] = lockId;
+}
+
+bool Room::unlockExit(const std::string& direction, const Item& key) {
+    if (lockedExits[direction] && key.getEffect() == lockIds[direction]) {
+        lockedExits[direction] = false;
+        std::cout << "You unlock the " << direction << " exit." << std::endl;
+        return true;
+    }
+    return false;
 }

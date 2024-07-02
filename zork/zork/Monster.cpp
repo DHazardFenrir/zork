@@ -47,3 +47,23 @@ std::string Monster::getDescription() const {
 bool Monster::alive() const {
     return stats.getHealth() > 0;
 }
+const Stats& Monster::getStats() const {
+    return stats;
+}
+
+
+void Monster::defend() {
+
+    // Similar logic to Player::defend()
+    int defenseBoost = 10; // Adjust according to monster capabilities
+    temporaryDefense += defenseBoost;
+    std::cout << getName() << " is defending and increases defense by " << defenseBoost << "." << std::endl;
+
+}
+
+void Monster::resetDefense() {
+    temporaryDefense = 0; // Reset any temporary defense boosts
+    std::cout << getName() << " defense reset to normal." << std::endl;
+
+
+}

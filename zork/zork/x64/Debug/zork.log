@@ -1,4 +1,7 @@
-﻿  Player.cpp
+﻿  Item.cpp
   main.cpp
+  Monster.cpp
+  Player.cpp
+  Room.cpp
   Generating Code...
   zork.vcxproj -> C:\Users\kille\Downloads\myzork\zork\zork\x64\Debug\zork.exe
