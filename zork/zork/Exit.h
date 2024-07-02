@@ -9,7 +9,7 @@ class Room;
 
 using namespace std;
 
-class Exit : public Entity {
+class Exit : public Entity, public std::enable_shared_from_this<Exit> {
 public:
     Exit(const string& name, const string& opposite_name, const string& description, shared_ptr<Room> origin, shared_ptr<Room> destination, bool one_way = false);
     ~Exit();

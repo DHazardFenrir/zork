@@ -7,12 +7,13 @@
 #include "Item.h"
 #include "Room.h"
 #include "Human.h"
+#include "Stats.h"
 using namespace std;
 
 class Player : public Human
 {
 public:
-	Player(const std::string& name, const std::string& description, std::shared_ptr<Room> room);
+	Player(const std::string& name, const std::string& description, std::shared_ptr<Room> room, Stats stats);
 	~Player();
 
 	

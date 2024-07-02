@@ -4,7 +4,6 @@
 #include <conio.h>
 #include "globals.h"
 #include "World.h"
-#include "Player.h"
 
 using namespace std;
 
@@ -29,8 +28,7 @@ int main()
     my_world.Initialize();
 
     // Create and set the player
-    auto player = make_shared<Player>("Hero", "You are an awesome adventurer!");
-    my_world.SetPlayer(player);
+   
 
     args.push_back("look");
 

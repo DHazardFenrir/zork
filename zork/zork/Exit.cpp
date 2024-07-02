@@ -8,8 +8,11 @@ Exit::Exit(const string& name, const string& opposite_name, const string& descri
     Entity(name, description, origin, EntityType::EXIT),
     closed(false), locked(false), key(nullptr), one_way(one_way), destination(destination), opposite_name(opposite_name)
 {
-    if (!one_way)
-        destination->AddEntity(shared_from_this());  // Add this exit to the destination room
+    if (!one_way) {
+        std::shared_ptr<Exit> createExit = std::shared_ptr<Exit>(this);
+        destination->AddEntity(createExit);
+    }
+         // Add this exit to the destination room
 }
 
 Exit::~Exit()
@@ -42,4 +45,7 @@ shared_ptr<Room> Exit::GetDestinationFrom(const shared_ptr<Room>& room) const
     }
 
     return nullptr;  // Return nullptr if the room does not match
+}
+EntityType Exit::GetType() const  {
+    return EntityType::EXIT;
 }

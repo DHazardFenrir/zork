@@ -24,9 +24,7 @@ public:
     // Process game ticks
     bool Tick(const vector<string>& args);
 
-    void SetPlayer(shared_ptr<Player> newPlayer) {
-        player = newPlayer;
-    }
+   
 private:
    
     // Parse user commands

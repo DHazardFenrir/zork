@@ -10,13 +10,16 @@
 #include "Room.h"
 #include "NPC.h"
 #include "Exit.h"
-
+#include "Entity.h"
+#include "Human.h"
 using namespace std;
 class Room;
 class Exit;
 Human::Human(const string& name, const string& description, shared_ptr<Room> room, int health, int strength, int defense, int speed) : Entity(name, description, room, EntityType::PLAYER), stats(health, strength, defense, speed) {
 	
 }
+
+Human::~Human() = default;
 void Human::Look(const vector<string>& args) const
 {
 	if (!CheckArgsSize(args, 2)) {

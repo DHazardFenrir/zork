@@ -23,40 +23,43 @@ World::~World() {
 
 void World::Initialize() {
     // Rooms ----
-    std::shared_ptr<Room> forest = std::make_shared<Room>("Forest", "You are surrounded by tall trees. It feels like a huge forest someone could get lost easily.");
-    
-    std::shared_ptr<Room> house = make_shared<Room>("House", "You are inside a beautiful but small white house.");
-    std::shared_ptr<Room> basement = make_shared<Room>("Basement", "The basement features old furniture and dim light.");
+    std::shared_ptr<Room> room1 = std::make_shared<Room>("Room 1", "Description of Room 1");
+    std::shared_ptr<Room> room2 = std::make_shared<Room>("Room 2", "Description of Room 2");
 
-    auto ex1 = make_shared<Exit>("west", "east", "Little path", house, forest);
-    auto ex2 = make_shared<Exit>("down", "up", "Stairs", house, basement);
-    ex2->locked = true;
+    // Exits ----
+    std::shared_ptr<Exit> exit1 = std::make_shared<Exit>("Exit 1", "Exit 2", "An exit from Room 1 to Room 2", room1, room2);
 
-    entities.push_back(forest);
-    entities.push_back(house);
-    entities.push_back(basement);
-    entities.push_back(ex1);
-    entities.push_back(ex2);
+    exit1->locked = true;
+
+    entities.push_back(room1);
+    entities.push_back(room2);
+    entities.push_back(exit1);
+
+    // Define locations
+    std::shared_ptr<Room> forest = room1;
+    std::shared_ptr<Room> house = room2;
 
     // NPCs ----
-    Stats npcStats{5,5,5,5};
+    Stats npcStats{ 5, 5, 5, 5 };
     auto butler = std::make_shared<NPC>("Butler", "The loyal butler.", forest, npcStats);
 
     entities.push_back(butler);
 
     // Items -----
-    auto mailbox = make_shared<Item>("Mailbox", "Looks like it might contain something.", house, ItemType::FOOD, Stats(0, 0, 0, 0));
+    auto mailbox = std::make_shared<Item>("Mailbox", "Looks like it might contain something.", house, ItemType::FOOD, Stats(0, 0, 0, 0));
     auto key = std::make_shared<Item>("Key", "A small key.", forest, ItemType::KEY, Stats{});
-    ex2->key = key;
+    exit1->key = key; // Use exit1 instead of ex2
 
-    auto sword = make_shared<Item>("Sword", "A simple old and rusty sword.", forest, ItemType::WEAPON, Stats(0, 3, 1, 0));
-    auto shield = make_shared<Item>("Shield", "An old wooden shield.", house, ItemType::ARMOUR, Stats(0, 0, 2, 0));
+    auto sword = std::make_shared<Item>("Sword", "A simple old and rusty sword.", forest, ItemType::WEAPON, Stats(0, 3, 1, 0));
+    auto shield = std::make_shared<Item>("Shield", "An old wooden shield.", house, ItemType::ARMOUR, Stats(0, 0, 2, 0));
 
     entities.push_back(mailbox);
+    entities.push_back(key);
     entities.push_back(sword);
     entities.push_back(shield);
 
-    auto player = std::make_shared<Player>("Hero", "The brave hero of our story.", forest, Stats{10,5,10,4});
+    // Player ----
+    auto player = std::make_shared<Player>("Hero", "The brave hero of our story.", forest, Stats{ 10, 5, 10, 4 });
 
     player->SetStrength(10); // Adjust as per your game's balance
     entities.push_back(player);
@@ -85,9 +88,10 @@ void World::GameLoop() {
     }
 }
 
-
 bool World::ParseCommand(const vector<string>& args) {
     bool ret = true;
+    // Assuming you have the 'player' object correctly initialized
+    std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(entities.back());
 
     switch (args.size()) {
     case 1: // Commands with no arguments
@@ -98,13 +102,11 @@ bool World::ParseCommand(const vector<string>& args) {
             vector<string> new_args = args;
             new_args.push_back("north");
             player->Go(new_args);
-            
         }
         else if (Same(args[0], "south") || Same(args[0], "s")) {
             vector<string> new_args = args;
             new_args.push_back("south");
             player->Go(new_args);
-           
         }
         else if (Same(args[0], "east") || Same(args[0], "e")) {
             vector<string> new_args = args;
@@ -159,7 +161,6 @@ bool World::ParseCommand(const vector<string>& args) {
         else if (Same(args[0], "unequip") || Same(args[0], "uneq")) {
             player->UnEquip(args);
         }
-        
         else if (Same(args[0], "attack") || Same(args[0], "at")) {
             player->Attack(args);
         }
