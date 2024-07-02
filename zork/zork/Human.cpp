@@ -25,7 +25,7 @@ void Human::Look(const vector<string>& args) const
 	if (!CheckArgsSize(args, 2)) {
 		if (Same(args[1], "me"))
 		{
-			cout << "\n" << name << "\n";
+			std::cout << "\n" << name << "\n";
 			cout << description << "\n";
 			return;
 		}
@@ -52,34 +52,34 @@ void Human::Look(const vector<string>& args) const
 	}
 }
 
-// ----------------------------------------------------
-bool Human::Go(const vector<string>& args)
-{
-	if (!CheckArgsSize(args, 2)) {
-		cout << "\nInvalid command. Usage: go <direction>\n";
+
+
+bool Human::Go(const std::string& direction) {
+	auto currentRoom = std::dynamic_pointer_cast<Room>(this->location);
+	if (args.size() != 2) {
+		cout << "Usage: go <direction>" << endl;
 		return false;
 	}
-	shared_ptr<Exit> exit = GetRoom()->GetExit(args[1]);
+	string direction = args[1];
 
-	if (!exit)
-	{
-		cout << "\nThere is no exit at '" << args[1] << "'.\n";
-		return false;
-	}
-
-	if (exit->locked)
-	{
-		cout << "\nThat exit is locked.\n";
+	// Ensure 'location' is a shared_ptr<Room> member of Human.
+	auto currentRoom = dynamic_pointer_cast<Room>(this->location);
+	if (!currentRoom) {
+		cout << "You are not in a room." << endl;
 		return false;
 	}
 
-	cout << "\nYou take direction " << exit->GetNameFrom((static_pointer_cast<Room>(parent))) << "...\n";
-	parent->RemoveChild(shared_from_this());
-	exit->GetDestinationFrom(static_pointer_cast<Room>(parent))->AddChild(shared_from_this());
-	parent->Look();
+	auto exit = currentRoom->GetExit(direction);
+	if (!exit) {
+		cout << "There is no exit in that direction." << endl;
+		return false;
+	}
 
+	this->location = exit->GetDestination(); // Assume Exit has GetDestination returning shared_ptr<Room>.
+	cout << "You move " << direction << " to " << this->location->GetName() << "." << endl;
 	return true;
 }
+
 
 // ----------------------------------------------------
 bool Human::Take(const vector<string>& args)
@@ -145,7 +145,7 @@ shared_ptr<Room> Human::GetRoom() const {
 
 bool Human::Drink(const vector<string>& args) {
 	if (!CheckArgsSize(args, 2)) {
-		cout << "\nInvalid command. Usage: eat <food>\n";
+		cout << "\nInvalid command. Usage: drink <potion>\n";
 		return false;
 	}
 	if (!IsAlive())
@@ -172,7 +172,7 @@ bool Human::Drink(const vector<string>& args) {
 }
 bool Human::Eat(const vector<string>& args) {
 	if (!CheckArgsSize(args, 2)) {
-		cout << "\nInvalid command. Usage: drink <potion>\n";
+		cout << "\nInvalid command. Usage: eat <food>\n";
 		return false;
 	}
 	if (!IsAlive())

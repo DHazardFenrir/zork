@@ -1,37 +1,23 @@
+#ifndef ITEM_H
+#define ITEM_H
 
-#ifndef __Item_H__
-#define __Item_H__
 #include <string>
-#include "Entity.h"
-#include "Stats.h"
-class Room;
 
-using namespace std;
+enum class ItemType { Weapon, Shield, Potion, Food };
 
-enum ItemType
-{
+class Item {
+private:
+    std::string name;
+    std::string description;
+    ItemType type;
+    int effect;  // Can be positive or negative based on the item type
 
-	WEAPON,
-	ARMOUR,
-	POTION,
-	FOOD,
-	KEY
+public:
+    Item(std::string name, std::string description, ItemType type, int effect);
+    std::string getName() const;
+    std::string getDescription() const;
+    ItemType getType() const;
+    int getEffect() const;
 };
 
-class Item : public Entity
-{
-public:
-	Item(const string& name, const string& description, shared_ptr<Room> room, ItemType item_type, const Stats& stats);
-	~Item();
-
-	void Look() const override;
-	int GetValue() const;
-	void SetStats(const Stats& new_stats);
-	 Stats GetStats() const;
-	 ItemType GetItemType() const;
-public:
-	Stats stats;
-	ItemType item_type;
-};
-
-#endif //__Item_H__
+#endif

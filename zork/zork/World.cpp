@@ -22,17 +22,14 @@ World::~World() {
 }
 
 void World::Initialize() {
-    // Rooms ----
-    std::shared_ptr<Room> room1 = std::make_shared<Room>("Room 1", "Description of Room 1");
-    std::shared_ptr<Room> room2 = std::make_shared<Room>("Room 2", "Description of Room 2");
+    auto room1 = std::make_shared<Room>("Room 1", "The first room.");
+    auto room2 = std::make_shared<Room>("Room 2", "The second room.");
+    auto exit1 = std::make_shared<Exit>("west", "A path to the west", room1, room2);
 
-    // Exits ----
-    std::shared_ptr<Exit> exit1 = std::make_shared<Exit>("Exit 1", "Exit 2", "An exit from Room 1 to Room 2", room1, room2);
-
-    exit1->locked = true;
-
-    entities.push_back(room1);
-    entities.push_back(room2);
+    room1->AddEntity(exit1);
+    // If exits are bidirectional, create and add the reverse exit as well
+    auto exit2 = std::make_shared<Exit>("east", "A path back east", room2, room1);
+    room2->AddEntity(exit2);
     entities.push_back(exit1);
 
     // Define locations

@@ -8,15 +8,13 @@ Exit::Exit(const string& name, const string& opposite_name, const string& descri
     Entity(name, description, origin, EntityType::EXIT),
     closed(false), locked(false), key(nullptr), one_way(one_way), destination(destination), opposite_name(opposite_name)
 {
-    if (!one_way) {
-        std::shared_ptr<Exit> createExit = std::shared_ptr<Exit>(this);
-        destination->AddEntity(createExit);
-    }
-         // Add this exit to the destination room
+    // Corrected: Removed unsafe use of 'this' in shared_ptr
+    // Instead, manage the bidirectional relationship outside of the constructor
 }
 
 Exit::~Exit()
 {
+    // Destructor body can be left empty or defaulted if no manual resource management is needed
 }
 
 void Exit::Look() const
@@ -46,6 +44,8 @@ shared_ptr<Room> Exit::GetDestinationFrom(const shared_ptr<Room>& room) const
 
     return nullptr;  // Return nullptr if the room does not match
 }
-EntityType Exit::GetType() const  {
+
+EntityType Exit::GetType() const {
     return EntityType::EXIT;
 }
+

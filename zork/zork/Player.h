@@ -1,30 +1,29 @@
-#ifndef __Player__
-#define __Player__
+#ifndef PLAYER_H
+#define PLAYER_H
 
+#include <string>
+#include <vector>
+#include "Stats.h"
 #include "Monster.h"
-#include <memory>
-#include "Stats.h"
 #include "Item.h"
-#include "Room.h"
-#include "Human.h"
-#include "Stats.h"
-using namespace std;
 
-class Player : public Human
-{
-public:
-	Player(const std::string& name, const std::string& description, std::shared_ptr<Room> room, Stats stats);
-	~Player();
-
-	
-	
+class Player {
+private:
+    std::string name;
+    Stats stats;
+    std::vector<Item> inventory;
+    const Item* equippedWeapon;
+    const Item* equippedShield;
 
 public:
-	Stats base_stats;
-	Stats equipped_stats;
-	vector<shared_ptr<Item>> equipped_items;
-	vector<shared_ptr<Item>> inventory;
-
+    Player(std::string name, Stats stats);
+    void attack(Monster& target);
+    void takeDamage(int damage);
+    std::string getName() const;
+    bool isAlive() const;
+    void equipItem(const Item& item);
+    void useItem(const Item& item);
+    const Stats& getStats() const;
 };
 
-#endif //__Player__
+#endif

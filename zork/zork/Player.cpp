@@ -1,21 +1,51 @@
 #include <iostream>
-#include "globals.h"
-#include "Room.h"
-#include "Exit.h"
-#include "Item.h"
 #include "Player.h"
-#include "Human.h"
-#include "Entity.h"
-// ----------------------------------------------------
-// Constructor that initializes the Player
-Player::Player(const std::string& name, const std::string& description, std::shared_ptr<Room> room, Stats stats)
-	: Human(name, description, room, 100, 10, 10, 10) // Pass all arguments to Human constructor
-{
-	// Additional initialization specific to Player, if necessary
-}
-// ----------------------------------------------------
-Player::~Player()
-{
+#include "Monster.h"  // This must be included here to fully define Monster
+
+
+Player::Player(std::string name, Stats stats) : name(name), stats(stats) {}
+
+void Player::attack(Monster& target) {
+    int damage = stats.getStrength() - target.getStats().getDefense();
+    if (damage < 0) damage = 0;
+    std::cout << name << " attacks " << target.getName() << " for " << damage << " damage!\n";
+    target.takeDamage(damage);
 }
 
-// ----------------------------------------------------
+void Player::takeDamage(int damage) {
+    int netDamage = damage - stats.getDefense();
+    if (netDamage < 0) netDamage = 0;
+    std::cout<<name<<" takes "<<netDamage<<" damage!\n";
+    stats.takeDamage(netDamage);
+}
+
+std::string Player::getName() const {
+    return name;
+}
+
+bool Player::isAlive() const {
+    return stats.getHealth() > 0;
+}
+
+const Stats& Player::getStats() const {
+    return stats;
+}
+void Player::equipItem(const Item& item) {
+    switch (item.getType()) {
+    case ItemType::Weapon:
+        equippedWeapon = &item;
+        stats.setStrength(stats.getStrength() + item.getEffect());
+        break;
+    case ItemType::Shield:
+        equippedShield = &item;
+        stats.setDefense(stats.getDefense() + item.getEffect());
+        break;
+    default:
+        std::cout << "Item cannot be equipped.\n";
+        break;
+    }
+}
+
+void Player::useItem(const Item& item) {
+    // Implement logic based on item type, e.g., healing potions, food
+}

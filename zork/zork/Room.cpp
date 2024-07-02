@@ -1,78 +1,67 @@
-#include <iostream>
 #include "Room.h"
-#include "Exit.h"
-#include "Item.h"
-#include "Monster.h"
+#include <iostream>
 
-using namespace std;
+Room::Room(std::string desc) : description(desc), monster(nullptr) {}
 
-Room::~Room()
-{
+void Room::connect(Room* room, const std::string& direction) {
+    exits[direction] = room;
+    // Define the opposite direction for the bidirectional connection
+    std::string oppositeDirection = direction == "north" ? "south" :
+        direction == "south" ? "north" :
+        direction == "east" ? "west" :
+        direction == "west" ? "east": "";
+    room->exits[oppositeDirection] = this;
 }
 
-void Room::AddItem(shared_ptr<Item> item) {
+void Room::addItem(const Item& item) {
     items.push_back(item);
 }
 
-void Room::AddEntity(shared_ptr<Entity> entity) {
-    entities.push_back(entity);
+void Room::setMonster(Monster* m) {
+    monster = m;
 }
 
-void Room::Look() const
-{
-    // Print room name and description
-    cout << "\n" << name << "\n";
-    cout << description;
-
-    // Iterate through entities to find exits and monsters
-    for (const auto& entity : entities) {
-        // Handle exits
-        if (entity->GetType() == EntityType::EXIT) {
-            auto ex = std::static_pointer_cast<Exit>(entity);  // Use static_pointer_cast instead
-            if (ex) {
-                auto destinationRoom = ex->GetDestinationFrom(shared_ptr<Room>(const_cast<Room*>(this)));  // Use a shared_ptr<Room> here
-                if (destinationRoom) {
-                    cout << "\nDirection (" << ex->GetNameFrom(shared_ptr<Room>(const_cast<Room*>(this))) << ") you see " << destinationRoom->GetName();
-                }
-            }
-        }
-    }
-
-    // Iterate through items to print their names
-    for (const auto& item : items) {
-        cout << "\nThere is an item here: " << item->GetName();
-    }
-
-    // Iterate through entities to find monsters
-    for (const auto& entity : entities) {
-        if (entity->GetType() == EntityType::MONSTER) {
-            auto monster = std::static_pointer_cast<Monster>(entity);
-            if (monster) {
-                cout << "\nThere is someone else here: " << monster->GetName();
-                if (!monster->IsAlive()) {
-                    cout << " (dead)";
-                }
-            }
-        }
-    }
-
-    cout << "\n";
+bool Room::hasMonster() const {
+    return monster != nullptr;
 }
 
-shared_ptr<Exit> Room::GetExit(const string& direction) const
-{
-    for (const auto& entity : entities) {
-        if (entity->GetType() == EntityType::EXIT) {
-            auto ex = std::static_pointer_cast<Exit>(entity);  // Use static_pointer_cast instead
-            if (ex && ex->GetNameFrom(shared_ptr<Room>(const_cast<Room*>(this))) == direction) {  // Use a shared_ptr<Room> here
-                return ex;
-            }
-        }
-    }
-
-    return nullptr;
+Monster* Room::getMonster() const {
+    return monster;
 }
 
-EntityType Room::GetType() const {
-    return EntityType::ROOM;
+std::string Room::getDescription() const {
+    return description;
+}
+
+const std::map<std::string, Room*>& Room::getExits() const {
+    return exits;
+}
+
+void Room::describe() const {
+    std::cout << "You are in " << description << ".\n";
+    if (!items.empty()) {
+        std::cout << "You see: ";
+        for (const Item& item : items) {
+            std::cout << item.getName() << " (" << item.getDescription() << "), ";
+        }
+        std::cout << "\b\b. \n"; // Remove last comma and add period
+    }
+    if (monster && monster->alive()) {
+        std::cout << "There is a " << monster->getName() << " here! " << monster->getDescription() << "\n";
+    }
+    std::cout << "Exits: ";
+    for (auto exit : exits) {
+        std::cout << exit.first << " ";
+    }
+    std::cout << std::endl;
+}
+
+Room* Room::move(const std::string& direction) {
+    if (exits.find(direction) != exits.end()) {
+        return exits[direction];
+    }
+    else {
+        std::cout << "You can't go that way.\n";
+        return this;
+    }
 }

@@ -1,51 +1,26 @@
-#ifndef __Monster__
-#define __Monster__
+#ifndef MONSTER_H
+#define MONSTER_H
 
 #include <string>
-#include "Entity.h"
-#include "Player.h"
 #include "Stats.h"
-#include <memory>
-#include <vector>
-class Room;
-class Item;
-class Human; // Forward declaration
-
-using namespace std;
-
-class Monster : public Entity
-{
-public:
-    Monster(const string& name, const string& description, shared_ptr<Room> room, int health = 100, int strength = 10, int defense = 5, int speed = 5, shared_ptr<Item> weapon = nullptr);
-    ~Monster();
-    virtual EntityType GetType() const override;
-    virtual void Look(const vector<string>& args) const;
-    virtual bool AutoEquip();
-    virtual void Tick();
-    int GetHealth() const;
-    int GetStrength() const;
-    int GetDefense() const;
-    int GetSpeed() const;
-    void SetCombatTarget(std::weak_ptr<Human> target) { combat_target = target; }
-    std::weak_ptr<Human> GetCombatTarget() const { return combat_target; }
-    void SetHealth(int value);
-    void SetStrength(int value);
-    void SetDefense(int value);
-    void SetSpeed(int value);
-
-    virtual int MakeAttack();
-    virtual int ReceiveAttack(int damage);
-    virtual void Die();
-
-    shared_ptr<Room> GetRoom() const;
-    bool PlayerInRoom() const;
-    bool IsAlive() const;
-
+#include "Item.h"  // Ensure the Item class is included
+class Player;
+class Monster {
 private:
+    std::string name;
+    std::string description;
     Stats stats;
-    std::weak_ptr<Human> combat_target; // Changed to weak_ptr<Human>
-    shared_ptr<Item> weapon;
-    shared_ptr<Item> armor;
+    const Item* equippedWeapon;
+    const Item* equippedShield;
+
+public:
+    Monster(std::string name, std::string description, Stats stats);
+    void attack(Player& target);
+    void takeDamage(int damage);
+    std::string getName() const;
+    std::string getDescription() const;
+    bool alive() const;
+    void equipItem(const Item& item);
 };
 
-#endif //__Monster__
+#endif

@@ -1,31 +1,21 @@
-#pragma once
-#ifndef __Stats__
-#define __Stats__
+#ifndef STATS_H
+#define STATS_H
 
-using namespace std;
-
-class Stats
-{
-public:
-	Stats(int health = 0, int strength = 0, int defense = 0, int speed = 0);
-		//Getters to attributes
-		int GetHealth() const;
-		int GetStrength() const;
-		int GetDefense() const;
-		int GetSpeed() const;
-
-		//Setters to attributes
-		void SetHealth(int value);
-		void SetStrength(int value);
-		void SetDefense(int value);
-		void SetSpeed(int value);
+class Stats {
 private:
-	int health;
-	int strength;
-	int defense;
-	int speed;
+    int health;
+    int strength;
+    int defense;
 
-	
-
+public:
+    Stats(int health, int strength, int defense);
+    int getHealth() const;
+    void setHealth(int newHealth);
+    int getStrength() const;
+    void setStrength(int newStrength);
+    int getDefense() const;
+    void setDefense(int newDefense);
+    void takeDamage(int amount);
 };
-#endif __Stats__
+
+#endif
