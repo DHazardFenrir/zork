@@ -3,35 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Status.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Status.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.40.33807\\INCLUDE\\CMATH||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Monster.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -48,6 +49,9 @@
     {
       "AbsoluteMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Stats.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C46E82A0-31D7-40A2-A528-A1644876047B}|zork\\zork.vcxproj|solutionrelative:zork\\Stats.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\cmath||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -57,17 +61,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
+              "Title": "Status.h",
+              "DocumentMoniker": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Status.h",
+              "RelativeDocumentMoniker": "zork\\Status.h",
+              "ToolTip": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Status.h",
+              "RelativeToolTip": "zork\\Status.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-02T18:00:28.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\main.cpp",
               "RelativeDocumentMoniker": "zork\\main.cpp",
               "ToolTip": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\main.cpp",
               "RelativeToolTip": "zork\\main.cpp",
-              "ViewState": "AQIAAJgAAAAAAAAAAAAYwKcAAAAAAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAswLkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-07-02T06:09:07.415Z",
               "EditorCaption": ""
@@ -82,12 +99,11 @@
               "RelativeToolTip": "zork\\Monster.h",
               "ViewState": "AQIAAAQAAAAAAAAAAAAUwBoAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-02T06:07:35.014Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T06:07:35.014Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Item.cpp",
               "DocumentMoniker": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Item.cpp",
               "RelativeDocumentMoniker": "zork\\Item.cpp",
@@ -95,18 +111,17 @@
               "RelativeToolTip": "zork\\Item.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-02T06:07:09.753Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T06:07:09.753Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Item.h",
               "DocumentMoniker": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Item.h",
               "RelativeDocumentMoniker": "zork\\Item.h",
               "ToolTip": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Item.h",
               "RelativeToolTip": "zork\\Item.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAAAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAgAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-07-02T06:06:51.601Z",
               "EditorCaption": ""
@@ -119,20 +134,20 @@
               "RelativeDocumentMoniker": "zork\\Player.cpp",
               "ToolTip": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Player.cpp",
               "RelativeToolTip": "zork\\Player.cpp",
-              "ViewState": "AQIAAKQAAAAAAAAAAAAQwMEAAAAAAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAvwFAAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-07-02T06:17:31.555Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "Player.h",
               "DocumentMoniker": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Player.h",
               "RelativeDocumentMoniker": "zork\\Player.h",
               "ToolTip": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Player.h",
               "RelativeToolTip": "zork\\Player.h",
-              "ViewState": "AQIAABMAAAAAAAAAAAAYwCcAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-07-02T06:17:22.772Z",
               "EditorCaption": ""
@@ -147,18 +162,17 @@
               "RelativeToolTip": "zork\\Stats.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-02T06:16:53.482Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T06:16:53.482Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Room.cpp",
               "DocumentMoniker": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.cpp",
               "RelativeDocumentMoniker": "zork\\Room.cpp",
               "ToolTip": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.cpp",
               "RelativeToolTip": "zork\\Room.cpp",
-              "ViewState": "AQIAAGoAAAAAAAAAAAAQwHwAAAAAAAAA",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAAwIEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-07-02T06:08:29.389Z",
               "EditorCaption": ""
@@ -173,25 +187,24 @@
               "RelativeToolTip": "zork\\Monster.cpp",
               "ViewState": "AQIAADYAAAAAAAAAAAAAAEEAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-02T06:07:40.231Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T06:07:40.231Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Room.h",
               "DocumentMoniker": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.h",
               "RelativeDocumentMoniker": "zork\\Room.h",
               "ToolTip": "C:\\Users\\kille\\Downloads\\myzork\\zork\\zork\\zork\\Room.h",
               "RelativeToolTip": "zork\\Room.h",
-              "ViewState": "AQIAABcAAAAAAAAAAAAQwCkAAAAAAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAAwCgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-07-02T06:08:09.68Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "cmath",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\cmath",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\cmath",
@@ -199,8 +212,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\cmath",
               "ViewState": "AQIAABkAAAAAAAAAAAAnwCQAAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-07-02T16:03:12.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T16:03:12.954Z"
             },
             {
               "$type": "Document",
@@ -212,8 +224,7 @@
               "RelativeToolTip": "zork\\Stats.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-02T06:16:43.376Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T06:16:43.376Z"
             }
           ]
         }

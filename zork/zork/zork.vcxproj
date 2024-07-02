@@ -24,6 +24,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Stats.h" />
+    <ClInclude Include="Status.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Item.cpp" />

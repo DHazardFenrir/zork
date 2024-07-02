@@ -1,7 +1,6 @@
-﻿  Item.cpp
-  main.cpp
-  Monster.cpp
+﻿  Monster.cpp
   Player.cpp
-  Room.cpp
+  main.cpp
   Generating Code...
+C:\Users\kille\Downloads\myzork\zork\zork\zork\main.cpp(14,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   zork.vcxproj -> C:\Users\kille\Downloads\myzork\zork\zork\x64\Debug\zork.exe

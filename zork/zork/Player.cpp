@@ -3,7 +3,7 @@
 #include "Monster.h"
 #include "Room.h"
 
-Player::Player(std::string name, Stats stats) : name(name), stats(stats) {}
+Player::Player(std::string name, Stats stats) : name(name), stats(stats), equippedWeapon(nullptr), equippedShield(nullptr), temporaryDefense(0) {}
 
 void Player::attack(Monster& target) {
     int damage = stats.getStrength() - target.getStats().getDefense();
@@ -53,7 +53,85 @@ bool Player::isAlive() const {
 const Stats& Player::getStats() const {
     return stats;
 }
+void Player::inflictStatus(Status status) {
+    if (status != Status::None) {
+        std::cout << getName() << " is inflicted with ";
+        switch (status) {
+        case Status::Burn: std::cout << "Burn"; break;
+        case Status::Poison: std::cout << "Poison"; break;
+        case Status::Paralyze: std::cout << "Paralyze"; break;
+        default: break;
+        }
+        std::cout << "!" << std::endl;
+    }
+    currentStatus = status;
+}
 
+void Player::applyStatusEffects() {
+    switch (currentStatus) {
+    case Status::Burn:
+        stats.setHealth(stats.getHealth() - 5);
+        std::cout << getName() << " suffers 5 burn damage!" << std::endl;
+        break;
+    case Status::Poison:
+        stats.setHealth(stats.getHealth() - 10);
+        std::cout << getName() << " suffers 10 poison damage!" << std::endl;
+        break;
+    case Status::Paralyze:
+        std::cout << getName() << " is paralyzed and loses a turn!" << std::endl;
+        break;
+    default:
+        break;
+    }
+}
+
+void Player::cureStatus(Status status) {
+    if (currentStatus == status) {
+        std::cout << getName() << " is cured of ";
+        switch (status) {
+        case Status::Burn: std::cout << "Burn"; break;
+        case Status::Poison: std::cout << "Poison"; break;
+        case Status::Paralyze: std::cout << "Paralyze"; break;
+        default: break;
+        }
+        std::cout << "!" << std::endl;
+        currentStatus = Status::None;
+    }
+}
+void Player::useSpecificItem(const Item& item) {
+    switch (item.getType()) {
+    case ItemType::Potion:  // Assuming ItemType::Potion is for health recovery
+        if (stats.getHealth() < stats.getMaxHealth()) {
+            stats.setHealth(stats.getHealth() + item.getEffect());
+            std::cout << getName() << " uses " << item.getName() << ", restoring " << item.getEffect() << " health points." << std::endl;
+            // Cure status if it's a specific cure potion
+            if (item.getName() == "Burn Cure Potion") {
+                cureStatus(Status::Burn);
+            }
+            else if (item.getName() == "Poison Cure Potion") {
+                cureStatus(Status::Poison);
+            }
+            else if (item.getName() == "Paralyze Cure Potion") {
+                cureStatus(Status::Paralyze);
+            }
+            removeItem(item.getName());
+            break;
+        }
+        else {
+            std::cout << getName() << " can't use " << item.getName() << ", your health is full." << std::endl;
+            break;
+        }
+
+    case ItemType::Food:  // Food might boost health or provide a temporary stat boost
+        stats.setHealth(stats.getDefense() + item.getEffect());
+        std::cout << getName() << " eats " << item.getName() << ", gaining " << item.getEffect() << " defense points." << std::endl;
+        removeItem(item.getName());
+        break;
+    default:
+        std::cout << item.getName() << " cannot be used right now." << std::endl;
+        break;
+    }
+}
 void Player::equipItem(const Item& item) {
     switch (item.getType()) {
     case ItemType::Weapon:
@@ -72,19 +150,18 @@ void Player::equipItem(const Item& item) {
 
 void Player::useItem(const Item& item) {
     switch (item.getType()) {
-    case ItemType::Potion:  // Assuming ItemType::Potion is for health recovery
+    case ItemType::Potion:
         if (stats.getHealth() < stats.getMaxHealth()) {
             stats.setHealth(stats.getHealth() + item.getEffect());
             std::cout << getName() << " uses " << item.getName() << ", restoring " << item.getEffect() << " health points." << std::endl;
-            break;
         }
         else {
             std::cout << getName() << " can't use " << item.getName() << ", your health is full" << std::endl;
-            break;
         }
-    case ItemType::Food:  // Food might boost health or provide a temporary stat boost
-        stats.setHealth(stats.getDefense() + item.getEffect());
-        std::cout << getName() << " eats " << item.getName() << ", gaining " << item.getEffect() << " defense points." << std::endl;
+        break;
+    case ItemType::Food:
+        stats.setHealth(stats.getHealth() + item.getEffect());
+        std::cout << getName() << " eats " << item.getName() << ", gaining " << item.getEffect() << " health points." << std::endl;
         break;
     default:
         std::cout << item.getName() << " cannot be used right now." << std::endl;
@@ -130,12 +207,7 @@ void Player::useItem() {
     std::cin >> index;
     if (index > 0 && index <= inventory.size()) {
         Item& item = inventory[index - 1];
-        if (item.getType() == ItemType::Potion || item.getType() == ItemType::Food) {
-            useItem(item);
-        }
-        else {
-            std::cout << item.getName() << " is not usable in combat." << std::endl;
-        }
+        useSpecificItem(item);
     }
     else {
         std::cout << "Invalid item selection." << std::endl;
@@ -161,7 +233,7 @@ void Player::pickUpItem(Room& room) {
     }
 
     std::cout << "Items available to pick up:" << std::endl;
-    for (size_t i = 0; i < itemNames.size(); i++) {
+    for (int i = 0; i < itemNames.size(); i++) {
         std::cout << i + 1 << ": " << itemNames[i] << std::endl;
     }
 
@@ -191,3 +263,25 @@ Item* Player::findItemInInventory(const std::string& itemName) {
     }
     return nullptr;
 }
+
+bool Player::unlockExit(Room& room, const std::string& direction) {
+    for (const auto& item : inventory) {
+        std::cout << "Checking item: " << item.getName() << " with effect: " << item.getEffect() << std::endl;
+        if (item.getType() == ItemType::Key && room.unlockExit(direction, item)) {
+            std::cout << "Key matches! Unlocking exit." << std::endl;
+            return true;
+        }
+    }
+    return false;
+}
+Status Player::getStatus() const {
+    return currentStatus;
+}
+
+void Player::setStatus(Status status) {
+    currentStatus = status;
+}
+
+
+
+

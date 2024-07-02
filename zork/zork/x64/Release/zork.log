@@ -1,0 +1,12 @@
+﻿  Item.cpp
+  main.cpp
+C:\Users\kille\Downloads\myzork\zork\zork\zork\main.cpp(14,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Monster.cpp
+  Player.cpp
+  Room.cpp
+  Stats.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 666 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  zork.vcxproj -> C:\Users\kille\Downloads\myzork\zork\zork\x64\Release\zork.exe

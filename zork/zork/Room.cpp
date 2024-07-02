@@ -9,13 +9,12 @@ void Room::connect(Room* room, const std::string& direction) {
     std::string oppositeDirection = direction == "north" ? "south" :
         direction == "south" ? "north" :
         direction == "east" ? "west" :
-        direction == "west" ? "east": "";
+        direction == "west" ? "east" : "";
     room->exits[oppositeDirection] = this;
 }
 
 void Room::addItem(const Item& item) {
     items.push_back(item);
-   
 }
 
 void Room::removeItem(const std::string& itemName) {
@@ -83,6 +82,10 @@ void Room::describe() const {
 }
 
 Room* Room::move(const std::string& direction) {
+    if (lockedExits.find(direction) != lockedExits.end() && lockedExits[direction]) {
+        std::cout << "The " << direction << " exit is locked. You need a key to unlock it.\n";
+        return this;
+    }
     if (exits.find(direction) != exits.end()) {
         return exits[direction];
     }
@@ -115,10 +118,22 @@ void Room::setLockedExit(const std::string& direction, int lockId) {
 }
 
 bool Room::unlockExit(const std::string& direction, const Item& key) {
+    std::cout << "Attempting to unlock " << direction << " with key effect: " << key.getEffect() << std::endl;
     if (lockedExits[direction] && key.getEffect() == lockIds[direction]) {
         lockedExits[direction] = false;
         std::cout << "You unlock the " << direction << " exit." << std::endl;
         return true;
+    }
+    std::cout << "Key does not match lock ID." << std::endl;
+    return false;
+}
+
+
+
+bool Room::isExitLocked(const std::string& direction) const {
+    auto it = lockedExits.find(direction);
+    if (it != lockedExits.end()) {
+        return it->second;
     }
     return false;
 }

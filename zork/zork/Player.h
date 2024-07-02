@@ -3,9 +3,10 @@
 
 #include <string>
 #include <vector>
-#include "Item.h"
 #include "Stats.h"
-#include "Room.h"  // Include Room header
+#include "Item.h"
+#include "Room.h"
+#include "Status.h"
 
 class Player {
 private:
@@ -14,7 +15,8 @@ private:
     std::vector<Item> inventory;
     const Item* equippedWeapon = nullptr;
     const Item* equippedShield = nullptr;
-    int temporaryDefense = 0;
+    int temporaryDefense;
+    Status currentStatus;
 
 public:
     Player(std::string name, Stats stats);
@@ -26,14 +28,21 @@ public:
     const Stats& getStats() const;
     void equipItem(const Item& item);
     void useItem(const Item& item);
-    void useItem();
     void defend();
     void resetDefense();
     void addItem(const Item& item);
     bool removeItem(const std::string& itemName);
+    void useItem();
     void showInventory() const;
     void pickUpItem(Room& room);
     Item* findItemInInventory(const std::string& itemName);
+    bool unlockExit(Room& room, const std::string& direction);
+    void inflictStatus(Status status);
+    void applyStatusEffects();
+    void cureStatus(Status status);
+    void useSpecificItem(const Item& item); 
+    Status getStatus() const; 
+    void setStatus(Status status); 
 };
 
-#endif // PLAYER_H
+#endif

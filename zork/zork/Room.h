@@ -33,9 +33,8 @@ public:
     std::vector<std::string> getItemNames() const;
     Item* getItem(const std::string& itemName); // Method to get an item by name
     void setLockedExit(const std::string& direction, int lockId);
-
     bool unlockExit(const std::string& direction, const Item& key);
-    
+    bool isExitLocked(const std::string& direction) const;  // Check if an exit is locked
 };
 
 #endif
