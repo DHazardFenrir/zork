@@ -14,6 +14,8 @@ Interaction
 look at [item name]: Inspect an item in the current room.
 pick up: Pick up an item in the current room after selecting it from a list.
 unlock [direction]: Unlock a locked exit in the specified direction if you have the corresponding key.
+
+when inputing a command, double tap the key enter, for the program to read and process the input.
 Combat
 
 attack: Attack the monster in the current room.
